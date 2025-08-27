@@ -1,0 +1,57 @@
+import React, { useState } from "react";
+import { assets } from "../assets/assets";
+import { Link, useNavigate } from "react-router-dom";
+
+const Navbar = () => {
+  const [user, setUser] = useState(true); // we keep the useState true for now to show that the person has logged(and to show the ui of logged person)  in now otherwise (null) means no users
+  const navigate = useNavigate();
+
+  return (
+    <div className="flex items-center justify-between px-4 py-4 ">
+      <Link to={"/"}>
+        <img src={assets.logo} alt="" className="w-28 sm:w-32 lg:w-40" />
+      </Link>
+      <div>
+        {user ? ( // if user is logged in :
+          <div className="flex item-center gap-2 sm:gap-3">
+            <button className="flex items-center gap-2 bg-blue-100 px-4 sm:px-6 py-1.5 sm:py rounded-full hover:scale-105 transition-all duration-700">
+              <img src={assets.credit_star} alt="" />
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Credits left : 50</p>
+            </button>
+            <p className="text-gray-600 max-sm:hidden pl-4 ">Hi,Aarya Admane here </p>
+            <div>
+              <img
+                src={assets.profile_icon}
+                className="w-10 drop-shadow cursor-pointer"
+                alt=""
+              />
+            </div>
+
+            {/* Dropdown menu */}
+            <div className="absolute hidden group-hover:block top-12 right-0 z-10 bg-white text-black rounded shadow-md">
+              <ul className="p-2">
+                <li className="cursor-pointer hover:text-red-500">Logout</li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          // if user has not Logged in then :
+          <div className="flex items-center gap-5 sm:gap-5">
+            <p
+              onClick={() => navigate("/buy")}
+              className="cursor-pointer hover:text-indigo-400 transition-colors duration-200"
+            >
+              Pricing
+            </p>
+
+            <button className="bg-zinc-800 text-white px-7 py-3 sm:px-10 text-sm rounded-full hover:bg-yellow-600 hover:scale-105 transition duration-300 ease-in-out">
+              Login
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
