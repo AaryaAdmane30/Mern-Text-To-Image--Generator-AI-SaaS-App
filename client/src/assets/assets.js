@@ -56,26 +56,27 @@ export const stepsData = [
   ];
 
 export const testimonialsData = [
+    
     {
-        image:profile_img_1,
-        name:'Donald Jackman',
-        role:'Graphic Designer',
-        stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
+        image: profile_img_1,
+        name: 'Christian Harper',
+        role: 'Software Developer',
+        stars: 5,
+        text: `As a developer, I love how quick and reliable Imagify is. It saves me hours on editing and lets me focus on actual design and coding work.`
     },
     {
-        image:profile_img_2,
-        name:'Richard Nelson',
-        role:'Content Creator',
-        stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
+        image: profile_img_2,
+        name: 'Kim Taehyung',
+        role: 'Global Celebrity',
+        stars: 5,
+        text: `I often need clean photos for my social media posts. Imagify makes it effortless  a single click and the results are professional every time.`
     },
     {
-        image:profile_img_1,
-        name:'Donald Jackman',
-        role:' Graphic Designer',
-        stars:5,
-        text:`I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`
+        image: profile_img_1,
+        name: 'Henry Cavill',
+        role: 'British Actor',
+        stars: 4,
+        text: `For promotional shoots and fan interactions, having a tool like Imagify is a blessing. It delivers flawless edits without the hassle.`
     },
 ]
 
