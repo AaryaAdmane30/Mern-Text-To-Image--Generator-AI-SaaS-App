@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
 import { assets } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../context/AppContext"; 
 
 const Navbar = () => {
 
-const {user} = useContext(AppContext);
+const {user , setShowLogin} = useContext(AppContext);
 //  used Context to get the user state and avoid prop drilling 
 //  prop drilling means passing props from grandparents comp to parents and soo on like a chain 
+
+
+
 
 const navigate = useNavigate();
 
@@ -57,7 +60,7 @@ const navigate = useNavigate();
               Pricing
             </p>
 
-            <button className="bg-zinc-800 text-white px-7 py-3 sm:px-10 text-sm rounded-full hover:bg-blue-500 hover:scale-105 transition duration-300 ease-in-out">
+            <button onClick={()=> setShowLogin(true)} className="bg-zinc-800 text-white px-7 py-3 sm:px-10 text-sm rounded-full hover:bg-blue-500 hover:scale-105 transition duration-300 ease-in-out">
               Login
             </button>
           </div>

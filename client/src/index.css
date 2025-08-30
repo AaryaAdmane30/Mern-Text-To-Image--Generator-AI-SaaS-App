@@ -4,3 +4,9 @@
 * {
   font-family: 'Outfit', sans-serif;
 }
+
+.placeholder-color::placeholder {
+  color: #4a90e2; 
+  font-weight: 300;
+  opacity: 1; /* override browser’s default faintness */
+}

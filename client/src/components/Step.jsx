@@ -1,9 +1,17 @@
 import React from "react";
 import { stepsData } from "../assets/assets";
+import { motion } from "motion/react";
+
 
 const Step = () => {
   return (
-    <div className="text-center my-16">
+    <motion.div className="text-center my-16"
+    initial={{ opacity: 0.2, y: 100 }}
+    transition={{ duration: 1 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      
+      viewport={{ once: true }}>
+
       {/* Section Heading */}
       <h1 className="text-3xl sm:text-4xl font-semibold mb-2">How it works</h1>
       <p className="text-lg text-gray-600 mb-12">
@@ -26,7 +34,7 @@ const Step = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

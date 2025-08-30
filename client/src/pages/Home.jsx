@@ -4,6 +4,7 @@ import Step from '../components/Step'
 import Description from '../components/Description'
 import Testimonials from '../components/Testimonials'
 import GenerateBtn from '../components/GenerateBtn'
+import Result from './Result'
 
 
 const Home = () => {
@@ -12,8 +13,11 @@ const Home = () => {
       <Header/>
       <Step/>
       <Description/>
+        <Result/>
       <Testimonials /> 
+
       <GenerateBtn/>
+    
      
     </div>
   )
