@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 import connectDb from "./config/mongodb.js";
 import userRouter from "./routes/userRoutes.js";
+import imageRouter from "./routes/imageRouter.js";
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -13,6 +14,9 @@ app.use(cors());
 
 // Routes
 app.use('/api/user', userRouter);
+//  Image Route :
+app.use('/api/image', imageRouter);
+
 app.get('/', (req, res) => res.send("API is Working"));
 
 const startServer = async () => {
