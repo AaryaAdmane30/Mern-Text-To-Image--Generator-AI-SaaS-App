@@ -86,7 +86,7 @@ const loginUser = async (req, res) => {
 
 const userCredits = async (req, res) => {
   try {
-    const userId = req.userId || req.body.userId; // ✅ will now work
+    const userId = req.userId || req.body.userId; 
 
     if (!userId) {
       return res.status(400).json({ success: false, message: "User ID is required" });

@@ -7,8 +7,8 @@ import axios from "axios";
 
 export const generateImage = async (req, res) => {
   try {
-    const userId = req.userId;  // ✅ take from JWT middleware
-    const { prompt } = req.body; // ✅ only prompt comes from body
+    const userId = req.userId;  //  take from JWT middleware
+    const { prompt } = req.body; //  only prompt comes from body
 
     if (!userId || !prompt) {
       return res.json({ success: false, message: "Missing Details" });
@@ -31,7 +31,7 @@ export const generateImage = async (req, res) => {
     const formData = new FormData();
     formData.append("prompt", prompt);
 
-    // 👉 ClipDrop API call
+    //  ClipDrop API call
     const { data } = await axios.post(
       "https://clipdrop-api.co/text-to-image/v1",
       formData,
