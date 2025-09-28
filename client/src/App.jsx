@@ -10,6 +10,9 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Login from './pages/Login'
 import { AppContext } from './context/AppContext'
+
+
+ import { ToastContainer } from 'react-toastify';
 const App = () => {
 
 
@@ -20,7 +23,7 @@ const App = () => {
       {/* bg-gradient-to-b → background gradient going top → bottom (b = bottom).
             from-teal-50 → gradient starts with teal-50 (a very light teal).
             to-orange-50 → gradient ends with orange-50 (a very light orange). */}
-  
+  <ToastContainer position='bottom-right' />
   <Navbar/>
 
   {/*  when showlogin is true then Login page will be mounted  */}

@@ -1,30 +1,67 @@
 
-//  Created Store and Context for User so that we can access the User from anywhere in the app without prop drilling 
- import React from "react";
-import  { createContext, useState } from "react";
+import axios from "axios";
+import React, { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export const AppContext = createContext();
 
-const AppContextProvider = (props) => {
-    const [user,setUser] = useState(null); // initial users arer set to null means no user 
-    // useState(true); // we keep the useState true for now to show that the person has logged(and to show the ui of logged person)  in now otherwise (null) means no users
+const AppContextProvider = ({ children }) => {
+  const [user, setUser] = useState(null); // null means no user logged in
+  const [showLogin, setShowLogin] = useState(false); // controls login/signup modal
+  const [token, setToken] = useState(localStorage.getItem('token')); // token from localStorage
+  const [credit, setCredit] = useState(false); // for user credit feature
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const loadCreditsData = async () => {
+  try {
+    const { data } = await axios.get(`${backendUrl}/api/user/credits`, {
+      headers: { token } // or { Authorization: `Bearer ${token}` } depending on backend
+    });
 
-//  the X button to close to signup page 
-    const [showLogin , setShowLogin] = useState(false);
-
-    const value = {
-        user,
-        setUser,
-        showLogin,
-        setShowLogin,
+    if (data.success) {
+      setCredit(data.credits);
+      setUser(data.user);
+    } else {
+      toast.error(data.message || "Failed to load credits");
     }
-    return <AppContext.Provider value={value}>
-        {props.children}
+  } catch (error) {
+    console.error(error);
+    toast.error(error.message || "Something went wrong while fetching credits");
+  }
+};
 
-    </AppContext.Provider>
+// Logout
+const logout = () => {
+  localStorage.removeItem("token");
+  setToken("");
+  setUser(null);
+};
+
+// Load credits whenever token exists
+useEffect(() => {
+  if (token) {
+    loadCreditsData();
+  }
+}, [token]);
 
 
 
-}
+  const value = {
+    user,
+    setUser,
+    showLogin,
+    setShowLogin,
+    token,
+    setToken,
+    credit,
+    setCredit,
+    backendUrl,
+    loadCreditsData,
+    logout
+    
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+};
+
 export default AppContextProvider;

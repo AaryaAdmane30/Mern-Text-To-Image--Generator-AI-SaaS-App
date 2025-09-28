@@ -5,7 +5,7 @@ import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
 
-const {user , setShowLogin} = useContext(AppContext);
+const {user , setShowLogin , logout , credit} = useContext(AppContext);
 //  used Context to get the user state and avoid prop drilling 
 //  prop drilling means passing props from grandparents comp to parents and soo on like a chain 
 
@@ -26,9 +26,9 @@ const navigate = useNavigate();
           <div onClick={()=> navigate('/buy')} className="flex item-center gap-2 sm:gap-3">
             <button className="flex items-center gap-2 bg-blue-100 px-4 sm:px-6 py-1.5 sm:py rounded-full hover:scale-105 transition-all duration-700">
               <img src={assets.credit_star} alt="" />
-              <p className="text-xs sm:text-sm font-medium text-gray-600">Credits left : 50</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600">Credits left : {credit}</p>
             </button>
-            <p className="text-gray-600 max-sm:hidden pl-4 ">Hi,Aarya Admane here </p>
+            <p className="text-gray-600 max-sm:hidden pl-4 ">Hi,{user.name}</p>
             {/* Profile with dropdown */}
             <div className="relative group">
               <img
@@ -40,7 +40,7 @@ const navigate = useNavigate();
               {/* Dropdown menu - hidden until hover */}
               <div className="absolute hidden group-hover:block top-12 right-0 z-10 bg-white text-black rounded shadow-md">
                 <ul className="p-2 bg-white list-none m-0 rounded-md border text-sm">
-                  <li
+                  <li onClick={logout}
                   
                     className="cursor-pointer py-1 px-2 pr-10"
                   >
