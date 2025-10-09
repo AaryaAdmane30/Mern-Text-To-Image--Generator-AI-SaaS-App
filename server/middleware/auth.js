@@ -1,6 +1,6 @@
 // JWT middleware for Express to authenticate users.
 
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
 // const userAuth = (req, res, next) => {
 
@@ -27,22 +27,51 @@ import jwt from "jsonwebtoken";
 // };
 
 
+// const userAuth = (req, res, next) => {
+//   const { token } = req.headers;
+//   if (!token) {
+//     return res.status(401).json({ success: false, message: "Not authorized. Login again." });
+//   }
+
+//   try {
+//     const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
+
+//     if (tokenDecode.id) {
+//       req.userId = tokenDecode.id;   
+//     } else {
+//       return res.status(401).json({ success: false, message: "Not authorized. Login again." });
+//     }
+
+//     console.log("Decoded User ID:", tokenDecode.id); 
+//     next();
+//   } catch (error) {
+//     console.error("JWT Error:", error);
+//     return res.status(401).json({ success: false, message: "Invalid or expired token." });
+//   }
+// }
+
+
+// export default userAuth;
+
+
+
+import jwt from "jsonwebtoken";
+
 const userAuth = (req, res, next) => {
-  const { token } = req.headers;
-  if (!token) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ success: false, message: "Not authorized. Login again." });
   }
+
+  const token = authHeader.split(" ")[1];
 
   try {
     const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
 
-    if (tokenDecode.id) {
-      req.userId = tokenDecode.id;   
-    } else {
-      return res.status(401).json({ success: false, message: "Not authorized. Login again." });
-    }
-
+    req.userId = tokenDecode.id;   
     console.log("Decoded User ID:", tokenDecode.id); 
+
     next();
   } catch (error) {
     console.error("JWT Error:", error);
@@ -50,5 +79,7 @@ const userAuth = (req, res, next) => {
   }
 }
 
-
 export default userAuth;
+
+
+

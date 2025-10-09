@@ -19,6 +19,11 @@ app.use('/api/image', imageRouter);
 
 app.get('/', (req, res) => res.send("API is Working"));
 
+app.get('/api/user/test', (req, res) => {
+  res.json({ success: true, message: "User route works!" });
+});
+
+
 const startServer = async () => {
   try {
     await connectDb();

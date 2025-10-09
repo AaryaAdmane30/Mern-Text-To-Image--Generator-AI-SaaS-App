@@ -8,7 +8,9 @@ const userRouter = express.Router()
 
 userRouter.post('/register', registerUser)
 userRouter.post('/login', loginUser)
-userRouter.post('/credits',userAuth,userCredits)
+userRouter.get('/credits',userAuth,userCredits)
+
+console.log("Credits route mounted"); // Add after defining /credits
 
 export default userRouter
 

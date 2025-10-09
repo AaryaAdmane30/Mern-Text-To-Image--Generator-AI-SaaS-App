@@ -57,36 +57,9 @@ const loginUser = async (req, res) => {
   }
 };
 
-
-// //  User Credits :
-// const userCredits = async (req, res) => {
-//   try {
-//     const userId = req.user?.id;
-//     if (!userId) {
-//       return res.status(401).json({ success: false, message: "User ID is required" });
-//     }
-
-//     const user = await userModel.findById(userId);
-//     if (!user) {
-//       return res.status(404).json({ success: false, message: "User not found" });
-//     }
-
-//     res.json({
-//       success: true,
-//       credits: user.creditBalance,
-//       user: { name: user.name }
-//     });
-
-//     console.log("req.user:", req.user);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ success: false, message: error.message });
-//   }
-// };
-
 const userCredits = async (req, res) => {
   try {
-    const userId = req.userId || req.body.userId; 
+    const userId = req.userId; // <-- fix here
 
     if (!userId) {
       return res.status(400).json({ success: false, message: "User ID is required" });
@@ -98,12 +71,19 @@ const userCredits = async (req, res) => {
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
-    res.json({ success: true, creditBalance: user.creditBalance });
+    res.json({ 
+      success: true, 
+      creditBalance: user.creditBalance, 
+      user: { name: user.name, email: user.email } 
+    });
   } catch (err) {
     console.error("Error in userCredits:", err);
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+
+
 
 
 export { registerUser, loginUser ,userCredits};
