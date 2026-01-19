@@ -25,6 +25,9 @@ const Login = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
+    // console.log("Sending:", { name, email, password, state });
+
+
     // Client-side validation
     if (state === "Login" && (!email || !password)) {
       toast.error("Please fill in all fields");
@@ -79,11 +82,13 @@ const Login = () => {
     <div className="fixed inset-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center">
       <motion.form
         onSubmit={onSubmitHandler}
+        
         className="relative bg-white rounded-xl p-6 sm:p-8 w-full max-w-md shadow-lg"
         initial={{ opacity: 0.2, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
         viewport={{ once: true }}
+        
       >
         {/* Close button */}
         <img
