@@ -5,10 +5,12 @@ import AppContextProvider from './context/AppContext.jsx';
 import App from './App.jsx';
 import './index.css';
 
+
+
 createRoot(document.getElementById('root')).render(
-  <AppContextProvider>      {/* Context wraps everything */}
-    <BrowserRouter>         {/* Router inside context */}
+  <BrowserRouter>          {/* Router must be on top */}
+    <AppContextProvider>   {/* Context can use useNavigate now */}
       <App />
-    </BrowserRouter>
-  </AppContextProvider>
+    </AppContextProvider>
+  </BrowserRouter>
 );

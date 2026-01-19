@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 
 import { motion } from "motion/react";
+import { AppContext } from "../context/AppContext";
 
 const Result = () => {
   const [isImageloading, setImageLoading] = useState(false);
@@ -11,10 +12,21 @@ const Result = () => {
 
   const [input , setInput] = useState('');
 
+  const {generateImage} = useContext(AppContext);
+
   const onSubmitHandler = async (e) => {
-    
+    e.preventDefault();
+    if(!input) return;
+
+    setImageLoading(true);
+    setLoading(true);
+
+    const image = await generateImage(input);
+    setImage(image);
+
+    setLoading(false);
   }
- 
+
   useEffect(() => {
     setLoading(true);
   }, []);
@@ -44,14 +56,12 @@ const Result = () => {
  Loading..
 </p>
 
-
       {!isImageloading &&  
       /// if image is not loaded (we have to prompt in text) then load the Generate Button
       (
         /* Input + Button */
         <div className="flex w-full max-w-xl gap-2 mt-6">
           <input
-
           onChange={e => setInput(e.target.value)} value={input}
             type="text"
             placeholder="Describe what you want to generate"
@@ -73,7 +83,10 @@ const Result = () => {
         <div className="flex gap-2 flex-wrap justify-center text-sm mt-10">
           <p
             className="bg-transparent border border-zinc-900 text-black px-8 py-3 rounded-full cursor-pointer hover:bg-gray-100 transition"
-            onClick={() => setImageLoading(false)}
+            onClick={() => {
+              setImageLoading(false);
+              setInput('');
+            }}
           >
             Generate Another
           </p>
